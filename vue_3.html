@@ -5,6 +5,8 @@
 		<meta charset="UTF-8">
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<style>
+			.card{width:40%; border:2px solid black;}
+			.container{padding:2px 16px;}
 			.special {background:yellow; border: 1px dotted #fe0000; padding:30px; display:block; text-align:center;}
 			.important {font-weight:bold; font-size:30px;}
 		</style>
@@ -12,12 +14,44 @@
 	<body>
 	
 	<div id="app">
-		<span v-if="profile">
-			Profile of {{profile.fname}} {{profile.lname}} 
-		</span>
+		
+		<div class="card" v-if="profile">
+			<div>
+				<img v-if="profile.pic" v-bind:src="profile.pic" alt="tingwei picture" style="width:100%" />
+				<img v-else v-bind:src="profile.placehoder" alt="placeholder picture" style="width:100%" />
+				<div class="container">
+					<div v-if="profile.fname && profile.lname">
+						<h4><b>
+							Profile of {{profile.fname}} {{profile.lname}}
+						</b></h4>
+					</div>
+					<div v-else>
+						<h4><b>
+							No name available
+						</b></h4>
+					</div>
+					<div v-if="profile.bio">
+						<p><b>Bio:</b>{{profile.bio}}</p>
+					</div>
+					<div v-else>
+						<p><b>No bio available</b></p>
+					</div>
+					<div v-if="profile.desc">
+						<p><b>Description:</b> {{profile.desc}}</p>
+					</div>
+					<div v-else>
+						<p><b>No description available</b></p>
+					</div>
+				</div>
+			</div>
+			<div v-else>
+			
+			</div>
+		</div>
 		<span v-else>
-			No Profile Data found.
-		</span>
+					No Profile Data found.
+				</span>
+
 	</div>
 	
 	<script>
@@ -25,12 +59,14 @@
 		el: '#app',
 		
 		data:{
-			/*
 			profile:{
-				fname: "John",
-				lname: "Doe"	
+				fname: "Tingwei",
+				lname: "Xie",
+				desc:"I am a web developer!",
+				bio:"Born in 1993, currently 28 years old.",
+				pic:"./images/sami.jpg",
+				placehoder:"./images/placeholder.png"
 			}
-			*/
 		}
 		
 	});
