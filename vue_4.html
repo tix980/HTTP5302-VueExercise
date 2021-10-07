@@ -14,8 +14,14 @@
 	<div id="app">
 		<ul>
 			<li v-for="part in scene">
-				<span>{{part.character}}</span>
-				<p>{{part.dialogue}}</p>
+				<div v-if="part.character === 'MACBETH'">
+					<span style="color:red" >{{part.character}}</span>
+				</div>
+				<div v-else-if="part.character === 'LADY MACBETH'">
+					<span style="color:blue;" >{{part.character}}</span>
+				</div>
+				
+				<p style=" white-space: pre; ">{{part.dialogue}}</p>
 			</li>
 		</ul>
 	</div>
