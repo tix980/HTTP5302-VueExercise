@@ -4,6 +4,6 @@
 - [x] Vue_2.html
 - [x] Vue_3.html
 - [x] Vue_4.html
-- [ ] Vue_5.html
-- [ ] Vue_6.html
-- [ ] Vue_7.html
+- [x] Vue_5.html
+- [x] Vue_6.html
+- [x] Vue_7.html
