@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!-- <!DOCTYPE HTML>
 <html>
 	<head>
 	
@@ -51,6 +51,140 @@
 			is_happy:function(){
 				
 				return this.treat_total>=10;	
+			}
+		}
+	});
+	
+	</script>
+		v-model will allow you to quickly bind form elements to the data property.
+		Make sure to set a default value!
+		The Computed property can be used like data, except for values that are calculated from data properties.
+		In this example 'treat_total' is computed from data properties, and 'is_happy' is computed from 'treat_total'.
+		
+		ASYNCHRONOUS LEARNING EXERCISE : J1
+		- Find any J1 problem
+		- Imagine an interface that allows the user to enter data on the webpage
+		- Build using v-model and computed properties!
+	</body>
+</html> -->
+
+
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+	
+		<title>J1 Practice</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			.formfield{margin-bottom:10px;}
+		</style>
+	</head>
+	<body>
+	<p>Tournament Selection. <a href="https://cemc.uwaterloo.ca/contests/computing/2016/index.html">from the J1 problem hosted by the CCC.</a></p>
+	<div id="app">
+		<div class="formfield">
+			<label>Round 1: <label> <input v-model="round_one_result">
+		</div>
+		<div class="formfield">
+			<label>Round 2: <label> <input v-model="round_two_result">
+		</div>
+		<div class="formfield">
+			<label>Round 3: <label> <input v-model="round_three_result">
+		</div>
+		<div class="formfield">
+			<label>Round 4: <label> <input v-model="round_four_result">
+		</div>
+		<div class="formfield">
+			<label>Round 5: <label> <input v-model="round_five_result">
+		</div>
+		<div class="formfield">
+			<label>Round 6: <label> <input v-model="round_six_result">
+		</div>
+		<div id="result">
+			<div><label>show total scores:</label><input type="checkbox" v-model="result"></div>
+			<div v-if="result">total scores: {{score_total}}</div>
+			<div v-if="result">group selection result: group {{group_result}}!</div>
+		</div>
+	</div>
+	
+	<script>
+	var app = new Vue({
+		el: '#app',
+		data:{
+			result:false,
+			dog_name:"Barley",
+			round_one_result:"",
+			round_two_result:"",
+			round_three_result:"",
+			round_four_result:"",
+			round_five_result:"",
+			round_six_result:"",
+			selection_result:0,
+			treat_qty_medium:0,
+			treat_qty_large:0,
+		},
+		computed:{
+			//If the participant wins, get 1 points, otherwise get 0 points
+			score_total:function(){
+				
+				if(this.round_one_result === "w" || this.round_one_result === "W" ){
+					this.round_one_result = 1;
+				}else{
+					this.round_one_result = 0;
+				}
+				
+				if(this.round_two_result === "w" || this.round_two_result === "W" ){
+					this.round_two_result = 1;
+				}else{
+					this.round_two_result = 0;
+				}
+				
+				if(this.round_three_result === "w" || this.round_three_result === "W" ){
+					this.round_three_result = 1;
+				}else{
+					this.round_three_result = 0;
+				}
+				
+				if(this.round_four_result === "w" || this.round_four_result === "W" ){
+					this.round_four_result = 1;
+				}else{
+					this.round_four_result = 0;
+				}
+				
+				if(this.round_five_result === "w" || this.round_five_result=== "W" ){
+					this.round_five_result = 1;
+				}else{
+					this.round_five_result = 0;
+				}
+				
+				if(this.round_six_result === "w" || this.round_six_result === "W" ){
+					this.round_six_result = 1;
+				}else{
+					this.round_six_result = 0;
+				}
+				
+				
+				
+				return (this.round_one_result + this.round_two_result + this.round_three_result + this.round_four_result
+						+ this.round_five_result + this.round_six_result);
+			},
+			
+			/* If a player gets 5 points or more, will be placed in group 1.
+				If a player gets 3 points or more, but less than 5, will be placed in group 2.
+				If a player gets 1 points or more, but less than 3, will be placed in group 3.
+				If a player gets 0 pont, will be eliminated from the game.
+			 */
+			group_result:function(){
+				if(this.score_total >=5){
+					return 1
+				}else if(this.score_total >=3 && this.score_total <5 ){
+					return 2
+				}else if(this.score_total >=1 && this.score_total <3 ){
+					return 3
+				}else{
+					return -1 + "," + "Basically means you have been eliminated!"
+				}
 			}
 		}
 	});

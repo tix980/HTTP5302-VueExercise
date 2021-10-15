@@ -6,14 +6,15 @@
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<style>
 			.box{width:200px; height:200px; background:green; border:2px solid black; text-align:center; line-height:200px; color:white;}
+			.redBox{width:100px; height:100px; background:red; border:2px solid black; text-align:center; line-height:210px; color:white;}
 			.hidden{display:none;}
 		</style>
 	</head>
 	<body>
 	
 	<div id="app">
-		<div v-bind:class="{box:true, hidden:boxHidden}">{{message}}</div>
-		<button v-on:click="showhide();">Click</button>
+		<div   v-on:mouseover = "showRedBox();" v-on:mouseleave = "hiddenRedBox();" v-bind:class="{box:true, redBox:redBoxHidden, hidden:boxHidden}">{{message}}</div>
+		<button v-on:click="showhide();">{{clickMessage}}</button>
 	</div>
 	
 	<script>
@@ -22,18 +23,41 @@
 		
 		data:{
 			boxHeight:200,
+			redBoxHidden : false,
 			boxHidden : false,
-			message  : 'Make me disappear!'
+			message  : 'Make me disappear!',
+			clickMessage : 'Hide',
 		},
 		methods:{
 			showhide : function(){
 				console.log(this.boxHidden);
 				if(this.boxHidden){
 					this.boxHidden=false;
+					this.clickMessage = 'Hide';
 				}else{
-					this.boxHidden=true;	
+					this.boxHidden=true;
+					this.clickMessage = 'Show';
+				}
+			},
+			
+			/* Show red box - mouseover function */
+			showRedBox : function(){
+				if(this.boxHidden === true && this.redBoxHidden){
+					this.redBoxHidden=false;
+				}else{
+					this.redBoxHidden=true;
+				}
+			},
+			
+			/* hide red box - mouseleave function */
+			hiddenRedBox : function(){
+				if(this.boxHidden === true && !this.redBoxHidden){
+					this.redBoxHidden=true;
+				}else{
+					this.redBoxHidden=false;
 				}
 			}
+			
 		}
 		
 	});
